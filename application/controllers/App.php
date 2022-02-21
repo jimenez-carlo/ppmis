@@ -59,6 +59,7 @@ class App extends CI_Controller
 				}
 				if ($clean_type == 'view_user') {
 					$data['ranks'] = $this->user->GetRanks();
+					$data['default'] = $this->user->GetUser($post['id']);
 				}
 				if ($clean_type == 'ranks') {
 					$data['statuses'] = $this->rank->GetRanks();

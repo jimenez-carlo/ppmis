@@ -14,6 +14,11 @@ class User_model extends CI_Model
     return $this->db->query("SELECT x.id,x.username,x.salt,x.created_date,concat(y.last,', ',y.first,' ', substring(y.middle,1,1)) as fullname,y.first,y.middle,y.last,y.email,r.rank_name as `rank`,z.role_name FROM tbl_users x inner join tbl_users_info y on y.user_id = x.id inner join tbl_roles z on z.id = x.role_id  inner join tbl_rank r on r.id = y.rank_id where x.deleted_flag = 0")->result_array();
   }
 
+  public function GetUser($id)
+  {
+    return $this->db->query("SELECT x.id,x.username,x.salt,x.created_date,concat(y.last,', ',y.first,' ', substring(y.middle,1,1)) as fullname,y.first,y.middle,y.last,y.email,r.rank_name as `rank`,z.role_name FROM tbl_users x inner join tbl_users_info y on y.user_id = x.id inner join tbl_roles z on z.id = x.role_id  inner join tbl_rank r on r.id = y.rank_id where x.deleted_flag = 0 and  x.id = $id")->row();
+  }
+
   public function GetRanks()
   {
     return $this->db->query("SELECT * from tbl_rank where deleted_flag = 0")->result_array();
